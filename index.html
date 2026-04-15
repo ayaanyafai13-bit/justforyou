@@ -2,70 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For My Rasmalai 💖</title>
+  <title>For Papa ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- SCREEN 1 -->
-<!-- SCREEN 1 -->
-<div class="screen active" id="screen-welcome">
+<!-- 🚗 LOADING SCREEN -->
+<div class="screen active" id="loading-screen">
 
-  <div class="nickname-bg">
-    <span>Cutuuu</span>
-    <span>jaan</span>
-    <span>pyara bacha</span>
-    <span>sleepy head</span>
-    <span>pagli</span>
-    <span>dummy</span>
-    <span>3 months anniversary</span>
-    <span>love</span>
-    <span>gorgeous</span>
-    <span>Riddhima</span>
+  <div class="map-bg"></div>
+
+  <div class="loading-stage">
+    <div class="road"></div>
+
+    <div class="car">
+      <img src="car.png" class="car-img">
+    </div>
+  </div>
+  <p id="locationText">Starting...</p>
+</div>
+
+<!-- 🏠 HOME SCREEN -->
+<div class="screen" id="home-screen">
+  <div class="bg-text">
+    <span>baat ko samajne ki koshish kro</span>
+    <span>Papadu</span>
+    <span>papadi</span>
+    <span>yafai wheels</span>
+    <span>silver rate</span>
   </div>
 
-  <div class="welcome-foreground">
-    <h1 id="welcomeTitle"></h1>
-    <p id="welcomeText"></p>
-    <button onclick="goToLoading()">Click Me 💝</button><br><br>
-    <img src="IMG_8183.PNG" alt="cute avatar" class="welcome-avatar">
+  <h1 class="title">For Papa</h1>
+
+  <div class="gifts">
+    <div class="gift" onclick="openGift(0, this)">🎁</div>
+    <div class="gift" onclick="openGift(1, this)">🎁</div>
+    <div class="gift" onclick="openGift(2, this)">🎁</div>
+    <div class="gift" onclick="openGift(3, this)">🎁</div>
   </div>
 
 </div>
 
-  <!-- SCREEN 2 -->
-  <div class="screen" id="screen-loading">
-    <h2 id="loadingText"></h2>
-<p id="subLoadingText">Cuteness Overloaded 💖</p>
-<p id="loadingPercent">0 / 1326 ❤️</p>
-    <div class="loader">
-      <div class="progress"></div>
-    </div>
+<!-- 📜 CONTENT SCREEN -->
+<div class="screen" id="content-screen">
+  <h2 id="contentTitle"></h2>
+  <p id="contentText"></p>
+
+  <!-- IMAGE AREA -->
+  <div id="contentImageContainer" class="hidden">
+    <img id="contentImage" src="" alt="">
   </div>
 
-  <!-- SCREEN 3 -->
-  <div class="screen" id="screen-gifts">
-    <h2 id="giftTitle"></h2>
-    <div class="gifts">
-      <div class="gift" onclick="openGift(0)">🎁</div>
-      <div class="gift" onclick="openGift(1)">🎁</div>
-      <div class="gift" onclick="openGift(2)">🎁</div>
-      <div class="gift" onclick="openGift(3)">🎁</div>
-       <div class="gift" onclick="openGift(4)">🔐</div>
-    </div>
-    <p class="hint">(Tap a gift)</p>
-  </div>
-
-  <!-- SCREEN 4 -->
-  <div class="screen" id="screen-letter">
-    <h2 id="letterTitle"></h2>
-    <p id="letterMessage"></p>
-<div id="queenFrame" class="queen-frame hidden">
-  <img src="IMG_8186.PNG" alt="My Queen" class="queen-image">
+  <button onclick="goBack()">⬅ Back</button>
 </div>
-
-    <button onclick="goBack()">⬅ Back</button>
-  </div>
 
 <script src="script.js"></script>
 </body>

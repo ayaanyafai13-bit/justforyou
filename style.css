@@ -1,11 +1,15 @@
+/* ===== BASE ===== */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-  color: #fff;
-  height: 100vh;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(200,200,200,0.15), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(180,180,180,0.15), transparent 40%),
+    linear-gradient(135deg, #ffdab9, #e8eef5);
+  color: #333;
 }
 
+/* ===== SCREENS ===== */
 .screen {
   display: none;
   height: 100vh;
@@ -19,162 +23,256 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* ===== MAP BACKGROUND ===== */
+.map-bg {
+  position: absolute;
+  inset: 0;
+  background: url("map.png") center/cover no-repeat;
+  opacity: 0.25;
+  z-index: 0;
+}
+
+/* ===== LOADING SCREEN ===== */
+#loading-screen {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== LOADING STAGE ===== */
+.loading-stage {
+  position: relative;
+  width: 80%;
+  height: 140px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+/* ===== ROAD ===== */
+.road {
+  position: absolute;
+  top: 55%;
+  left: 0;
+  width: 100%;
+  height: 41px;
+  background: #9a9a9a;
+  border-radius: 20px;
   z-index: 1;
 }
 
-
-button {
-  margin-top: 20px;
-  padding: 12px 24px;
-  font-size: 16px;
-  border: none;
-  border-radius: 25px;
-  background: #fff;
-  color: #ff5f7e;
-  cursor: pointer;
-  font-weight: bold;
+.road::after {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 4px;
+  background: repeating-linear-gradient(
+    to right,
+    white 0 25px,
+    transparent 25px 50px
+  );
+  top: 50%;
+  transform: translateY(-50%);
+  animation: roadMove 1s linear infinite;
 }
 
-.loader {
-  width: 80%;
-  height: 12px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 10px;
-  overflow: hidden;
+@keyframes roadMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ===== CAR ===== */
+.car {
+  position: absolute;
+  left: 0;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 180px;
+  z-index: 2;
+  animation: drive 8s linear forwards;
+}
+
+.car-img {
+  width: 100%;
+  display: block;
+  transform: scaleX(-1);
+  animation: bounce 0.5s ease-in-out infinite;
+}
+
+@keyframes drive {
+  from { left: 0; }
+  to { left: 85%; }
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0) scaleX(-1); }
+  50% { transform: translateY(-2px) scaleX(-1); }
+}
+
+/* ===== TEXT ===== */
+#locationText {
   margin-top: 30px;
+  font-size: 18px;
+  opacity: 0.85;
 }
 
-.progress {
-  width: 0%;
-  height: 100%;
-  background: #fff;
-  animation: load 5s forwards;
+/* ===== TITLE ===== */
+.title {
+  font-size: 70px;
+  font-family: cursive;
+  color: #9B1C31;
+  position: relative;
+
+  text-shadow:
+    0 1px 0 #ffffff,
+    0 2px 2px rgba(0,0,0,0.15),
+    0 4px 6px rgba(0,0,0,0.2);
 }
 
-@keyframes load {
-  to { width: 100%; }
+.title::before {
+  content: "For Papa";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.15) 30%,
+    rgba(255, 215, 0, 0.7) 50%,
+    rgba(255, 215, 0, 0.15) 70%,
+    transparent 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: metalShine 3s linear infinite;
 }
 
+.title::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.15), transparent 60%);
+  mix-blend-mode: multiply;
+}
+
+@keyframes metalShine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ===== BACKGROUND WORDS ===== */
+.bg-text span {
+  position: absolute;
+  font-size: 18px;
+  opacity: 0.25;
+  color: #000;
+}
+.bg-text span:nth-child(1){ top:10%; left:10%; transform:rotate(25deg);}
+.bg-text span:nth-child(2){ top:30%; left:70%; transform:rotate(-20deg);}
+.bg-text span:nth-child(3){ top:60%; left:20%; transform:rotate(30deg);}
+.bg-text span:nth-child(4){ top:75%; left:60%; transform:rotate(-15deg);}
+.bg-text span:nth-child(5){ top:45%; left:40%; transform:rotate(10deg);}
+
+/* ===== GIFTS ===== */
 .gifts {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
   margin-top: 30px;
 }
 
 .gift {
   font-size: 60px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: 0.3s;
 }
 
 .gift:hover {
   transform: scale(1.2);
 }
 
-.hint {
-  margin-top: 20px;
-  opacity: 0.8;
-}
-#subLoadingText {
-  margin-top: 10px;
-  font-size: 16px;
-  opacity: 0.9;
+/* ===== CONTENT ===== */
+#contentText {
+  max-width: 500px;
+  line-height: 1.6;
 }
 
-#loadingPercent {
-  margin-top: 8px;
-  font-size: 14px;
-  opacity: 0.8;
-}
-.nickname-bg {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
-pointer-events: none;
-
+/* smooth fade */
+#content-screen {
+  animation: fadeIn 0.5s ease;
 }
 
-#screen-welcome {
-  position: relative;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.nickname-bg span {
-  position: absolute;
-  font-family: 'Comic Sans MS', 'Segoe UI', cursive;
-  font-size: 18px;
-  opacity: 0.28;
-  color: #4c3228;
-  user-select: none;pointer-events: none;
-
-}
-.nickname-bg span:nth-child(1) { top: 10%; left: 15%; transform: rotate(-12deg); }
-.nickname-bg span:nth-child(2) { top: 25%; left: 60%; transform: rotate(8deg); }
-.nickname-bg span:nth-child(3) { top: 40%; left: 20%; transform: rotate(15deg); }
-.nickname-bg span:nth-child(4) { top: 55%; left: 70%; transform: rotate(-18deg); }
-.nickname-bg span:nth-child(5) { top: 70%; left: 30%; transform: rotate(6deg); }
-.nickname-bg span:nth-child(6) { top: 15%; left: 75%; transform: rotate(-8deg); }
-.nickname-bg span:nth-child(7) { top: 80%; left: 55%; transform: rotate(12deg); }
-.nickname-bg span:nth-child(8) { top: 35%; left: 45%; transform: rotate(-5deg); }
-.nickname-bg span:nth-child(9) { top: 60%; left: 10%; transform: rotate(18deg); }
-.nickname-bg span:nth-child(10){ top: 85%; left: 80%; transform: rotate(-14deg); }
-.welcome-avatar {
-  margin-top: 15px;
-  width: 90px;        /* small & cute */
-  height: auto;
-  opacity: 0.95;
-}
-.welcome-foreground {
-  position: relative;
-  z-index: 10;
-}
-.queen-frame {
-  margin: 25px auto;
-  padding: 12px;
-  width: 220px;
-  border: 10px solid #8b5a2b; /* wood tone */
-  border-radius: 14px;
-  background: linear-gradient(145deg, #c9a66b, #8b5a2b);
-  box-shadow:
-    0 0 20px rgba(255, 105, 180, 0.4),
-    inset 0 0 10px rgba(255,255,255,0.3);
-  animation: heartbeat 2.2s infinite;
-  position: relative;
-}
-
-.queen-image {
-  width: 100%;
-  border-radius: 8px;
-  display: block;
-}
-
-/* Hidden by default */
-.hidden {
+/* ===== 🌳 WOODEN FRAME (FINAL CLEAN) ===== */
+#contentImageContainer {
+  margin-top: 60px;
   display: none;
+  justify-content: center;
 }
 
-/* Heartbeat animation */
-@keyframes heartbeat {
-  0%   { transform: scale(1); }
-  14%  { transform: scale(1.04); }
-  28%  { transform: scale(1); }
-  42%  { transform: scale(1.04); }
-  70%  { transform: scale(1); }
+#content-screen #contentImage {
+  width: 230px;        /* 👈 FIXED SIZE */
+  max-width: 80vw;
+  display: block;
+
+  padding: 8px;
+  background-color: #2b1a0f;
+
+  border: 8px solid #6b4423;
+  border-radius: 6px;
+
+  /* wood grain */
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+
+  /* depth */
+  box-shadow:
+    inset 0 0 6px rgba(0,0,0,0.4),
+    0 8px 18px rgba(0,0,0,0.35);
+
+  box-sizing: border-box;
 }
 
-/* Sparkle glow */
-.queen-frame::after {
-  content: "💖";
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  font-size: 20px;
-  animation: sparkle 1.8s infinite ease-in-out;
+/* ===== BUTTON ===== */
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #333;
+  color: white;
 }
 
-@keyframes sparkle {
-  0%, 100% { opacity: 0.2; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); }
+/* 🎁 Gift Opening Animation */
+.gift {
+  font-size: 60px;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
+.gift:active {
+  transform: scale(0.9);
+}
+
+.gift.opening {
+  animation: giftOpen 0.4s ease forwards;
+}
+
+@keyframes giftOpen {
+  0% { transform: scale(1) rotate(0deg); }
+  40% { transform: scale(0.8) rotate(-10deg); }
+  70% { transform: scale(1.2) rotate(10deg); }
+  100% { transform: scale(0) rotate(20deg); opacity: 0; }
+}
